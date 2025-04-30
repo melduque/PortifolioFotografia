@@ -1,0 +1,49 @@
+# Ignore pastas do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore arquivos de build
+bin/
+obj/
+out/
+
+# Ignore pacotes e dependências
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs e temporários
+*.log
+*.tmp
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# node.js (se usar JS com npm)
+node_modules/
+npm-debug.log
+
+# Arquivos de configuração sensíveis (opcional)
+*.env
+appsettings.Development.json
+secrets.json
+
+# MongoDB (se usar dump local ou arquivos temporários)
+*.mongodb
+*.bson
+*.lock
+
+# Outros
+*.swp
+*.bak
+*.orig
+*.rej
+*.sdf
