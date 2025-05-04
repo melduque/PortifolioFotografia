@@ -17,5 +17,18 @@ namespace PortifolioFotografia.Controllers {
         public async Task<IActionResult> Index() {
             return View(await _fotografiaContexto.Fotografias.Find(a => true).ToListAsync());
         }
+        
+        [HttpGet]
+        public IActionResult NovaFotografia() {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NovaFotografia(Fotografia fotografia) {
+            fotografia.idFotografia = Guid.NewGuid();
+            await _fotografiaContexto.Fotografias.InsertOneAsync(fotografia);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

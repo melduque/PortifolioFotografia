@@ -8,7 +8,7 @@ namespace PortifolioFotografia.Models {
 
         public String nomeFotografo { get; set; }
         
-        public String descricaoFotografià {  get; set; }
+        public String descricaoFotografia {  get; set; }
 
         public DateTime data {  get; set; }  
     }

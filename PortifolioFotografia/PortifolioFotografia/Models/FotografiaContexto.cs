@@ -8,7 +8,9 @@ namespace PortifolioFotografia.Models {
         private readonly IMongoDatabase _mongoDatabase;
 
         public FotografiaContexto(IOptions<ConfigDB> opcoes) {
+            Console.WriteLine(opcoes.Value.ConnectionString);
             MongoClient mongoClient = new MongoClient(opcoes.Value.ConnectionString);
+
 
             if(mongoClient != null) {
                 _mongoDatabase = mongoClient.GetDatabase(opcoes.Value.Database);
