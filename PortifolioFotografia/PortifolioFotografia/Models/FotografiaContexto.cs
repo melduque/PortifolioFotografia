@@ -7,13 +7,12 @@ namespace PortifolioFotografia.Models {
 
         private readonly IMongoDatabase _mongoDatabase;
 
-        public FotografiaContexto(IOptions<ConfigDB> opcoes) {
-            Console.WriteLine(opcoes.Value.ConnectionString);
-            MongoClient mongoClient = new MongoClient(opcoes.Value.ConnectionString);
+        public FotografiaContexto() {
 
+            MongoClient mongoClient = new MongoClient("mongodb://localhost:27017");
 
             if(mongoClient != null) {
-                _mongoDatabase = mongoClient.GetDatabase(opcoes.Value.Database);
+                _mongoDatabase = mongoClient.GetDatabase("PortifolioFotografias");
             }
         }
 

@@ -10,8 +10,8 @@ namespace PortifolioFotografia.Controllers {
         
         private readonly FotografiaContexto _fotografiaContexto;
 
-        public FotografiasController(IOptions<ConfigDB> opcoes) {
-            _fotografiaContexto = new FotografiaContexto(opcoes);
+        public FotografiasController() {
+            _fotografiaContexto = new FotografiaContexto();
         }
 
         public async Task<IActionResult> Index() {
