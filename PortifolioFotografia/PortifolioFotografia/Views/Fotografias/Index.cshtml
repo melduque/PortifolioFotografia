@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="AdicionarFoto">Adicionar Nova Foto</a>
+    <a asp-action="NovaFotografia">Adicionar Nova Foto</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +43,10 @@
                 @Html.DisplayFor(modelItem => item.data)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                <!-- @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | -->
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-action="AtualizarFotografia" asp-route-idFotografia="@item.idFotografia">Atualizar Fotografia</a>
+                <form asp-action="ExcluirFotografia" asp-route-idFotografia="@item.idFotografia">
+                    <button type="submit">Excluir</button>
+                </form>
             </td>
         </tr>
 }

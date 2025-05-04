@@ -1,17 +1,20 @@
 ﻿@model PortifolioFotografia.Models.Fotografia
 
 @{
-    ViewData["Title"] = "Nova Fotografia";
+    ViewData["Title"] = "AtualizarFotografia";
 }
 
-<h1>Nova Fotografia</h1>
+<h1>AtualizarFotografia</h1>
 
 <h4>Fotografia</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="NovaFotografia">
+        <form asp-action="AtualizarFotografia">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input asp-for="idFotografia" class="form-control" hidden/>
+            
             <div class="form-group">
                 <label asp-for="nomeFotografo" class="control-label"></label>
                 <input asp-for="nomeFotografo" class="form-control" />
@@ -28,7 +31,7 @@
                 <span asp-validation-for="data" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Adicionar" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
