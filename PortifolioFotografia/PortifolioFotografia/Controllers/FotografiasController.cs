@@ -48,6 +48,8 @@ public async Task<IActionResult> NovaFotografia(Fotografia fotografia, IFormFile
             Fotografia fotografia = await _fotografiaContexto.Fotografias.Find(a => a.idFotografia == idFotografia).FirstOrDefaultAsync();
             return View(fotografia);
         }
+
+
         [HttpGet]
 public async Task<IActionResult> Galeria()
 {
@@ -56,11 +58,38 @@ public async Task<IActionResult> Galeria()
 }
 
 
-        [HttpPost]
-        public async Task<IActionResult> AtualizarFotografia(Fotografia fotografia) {
-            await _fotografiaContexto.Fotografias.ReplaceOneAsync(a => a.idFotografia == fotografia.idFotografia, fotografia);
-            return RedirectToAction(nameof(Index));
+[HttpPost]
+public async Task<IActionResult> AtualizarFotografia(Fotografia fotografia, IFormFile imagem)
+{
+    if (imagem != null && imagem.Length > 0)
+    {
+        using (var ms = new MemoryStream())
+        {
+            await imagem.CopyToAsync(ms);
+            var imagemBytes = ms.ToArray();
+            fotografia.imagemBase64 = Convert.ToBase64String(imagemBytes);
         }
+    }
+    else
+    {
+        var fotoExistente = await _fotografiaContexto.Fotografias
+            .Find(a => a.idFotografia == fotografia.idFotografia)
+            .FirstOrDefaultAsync();
+
+        if (fotoExistente != null)
+        {
+            fotografia.imagemBase64 = fotoExistente.imagemBase64;
+        }
+    }
+
+    await _fotografiaContexto.Fotografias.ReplaceOneAsync(
+        a => a.idFotografia == fotografia.idFotografia,
+        fotografia
+    );
+
+    return RedirectToAction(nameof(Index));
+}
+
 
         [HttpPost]
         public async Task<ActionResult> ExcluirFotografia(Guid idFotografia) {
