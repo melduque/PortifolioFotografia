@@ -1,0 +1,31 @@
+@model List<PortifolioFotografia.Models.Fotografia>
+
+@{
+    ViewData["Title"] = "Todas as Fotografias";
+}
+
+<h1>Fotografias</h1>
+
+<div class="row">
+    @foreach (var foto in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                @if (!string.IsNullOrEmpty(foto.imagemBase64))
+                {
+                    <img class="card-img-top" src="data:image/jpeg;base64,@foto.imagemBase64" alt="Foto de @foto.nomeFotografo" />
+                }
+                else
+                {
+                    <div class="card-img-top text-center p-4 bg-light text-muted">Sem imagem</div>
+                }
+
+                <div class="card-body">
+                    <h5 class="card-title">@foto.nomeFotografo</h5>
+                    <p class="card-text">@foto.descricaoFotografia</p>
+                    <p class="card-text"><small class="text-muted">@foto.data.ToString("dd/MM/yyyy")</small></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

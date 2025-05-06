@@ -9,7 +9,8 @@ namespace PortifolioFotografia.Models {
         public Guid idFotografia { get; set; }
 
         public String nomeFotografo { get; set; }
-        
+        public string imagemBase64 { get; set; }
+
         public String descricaoFotografia {  get; set; }
 
         public DateOnly data {  get; set; }  

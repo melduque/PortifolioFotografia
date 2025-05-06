@@ -24,18 +24,37 @@ namespace PortifolioFotografia.Controllers {
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> NovaFotografia(Fotografia fotografia) {
-            fotografia.idFotografia = Guid.NewGuid();
-            await _fotografiaContexto.Fotografias.InsertOneAsync(fotografia);
-            return RedirectToAction(nameof(Index));
+[HttpPost]
+public async Task<IActionResult> NovaFotografia(Fotografia fotografia, IFormFile imagem)
+{
+    fotografia.idFotografia = Guid.NewGuid();
+
+    if (imagem != null && imagem.Length > 0)
+    {
+        using (var ms = new MemoryStream())
+        {
+            await imagem.CopyToAsync(ms);
+            var imagemBytes = ms.ToArray();
+            fotografia.imagemBase64 = Convert.ToBase64String(imagemBytes);
         }
+    }
+
+    await _fotografiaContexto.Fotografias.InsertOneAsync(fotografia);
+    return RedirectToAction(nameof(Index));
+}
 
         [HttpGet]
         public async Task<IActionResult> AtualizarFotografia(Guid idFotografia) {
             Fotografia fotografia = await _fotografiaContexto.Fotografias.Find(a => a.idFotografia == idFotografia).FirstOrDefaultAsync();
             return View(fotografia);
         }
+        [HttpGet]
+public async Task<IActionResult> Galeria()
+{
+    var fotos = await _fotografiaContexto.Fotografias.Find(_ => true).ToListAsync();
+    return View(fotos); 
+}
+
 
         [HttpPost]
         public async Task<IActionResult> AtualizarFotografia(Fotografia fotografia) {
