@@ -4,25 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Portifólio de Fotografias</h1>
 
-<p>
-    <a asp-action="NovaFotografia">Adicionar Nova Foto</a>
+<p class="btn-container">
+    <a class="btn btn-primary btn-sm" asp-action="NovaFotografia">Adicionar Nova Foto</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idFotografia)
+            <th>Id:
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nomeFotografo)
+            <th>Fotógrafo:
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descricaoFotografia)
+            <th>Descrição:
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.data)
+            <th>Data:
             </th>
             <th></th>
         </tr>
@@ -43,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.data)
             </td>
             <td>
-                <a asp-action="AtualizarFotografia" asp-route-idFotografia="@item.idFotografia">Atualizar Fotografia</a>
-                <form asp-action="ExcluirFotografia" asp-route-idFotografia="@item.idFotografia">
-                    <button type="submit">Excluir</button>
+                <a class="btn btn-primary btn-sm" asp-action="AtualizarFotografia" asp-route-idFotografia="@item.idFotografia">Atualizar Fotografia</a>
+                <form asp-action="ExcluirFotografia" asp-route-idFotografia="@item.idFotografia" method="post" onsubmit="return confirm('Tem certeza que deseja excluir esta fotografia?');">
+                    <button type="submit" class="btn btn-danger btn-sm mt-1">Excluir</button>
                 </form>
             </td>
         </tr>

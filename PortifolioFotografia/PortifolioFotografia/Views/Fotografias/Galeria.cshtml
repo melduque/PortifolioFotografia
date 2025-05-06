@@ -13,7 +13,9 @@
             <div class="card shadow-sm">
                 @if (!string.IsNullOrEmpty(foto.imagemBase64))
                 {
-                    <img class="card-img-top" src="data:image/jpeg;base64,@foto.imagemBase64" alt="Foto de @foto.nomeFotografo" />
+                    <a href="javascript:void(0)" class="image-link" data-bs-toggle="modal" data-bs-target="#fotoModal" data-imagem="data:image/jpeg;base64,@foto.imagemBase64">
+                        <img class="card-img-top" src="data:image/jpeg;base64,@foto.imagemBase64" alt="Foto de @foto.nomeFotografo" />
+                    </a>
                 }
                 else
                 {
@@ -29,3 +31,34 @@
         </div>
     }
 </div>
+
+<div class="modal fade" id="fotoModal" tabindex="-1" aria-labelledby="fotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="expandedImage" class="img-fluid" src="" alt="Imagem Expandida" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const modal = document.getElementById('fotoModal');
+        const expandedImg = document.getElementById('expandedImage');
+
+        document.querySelectorAll('.image-link').forEach(link => {
+            link.addEventListener('click', function () {
+                const imagem = this.getAttribute('data-imagem');
+                expandedImg.setAttribute('src', imagem);
+            });
+        });
+
+        modal.addEventListener('hidden.bs.modal', function () {
+            expandedImg.setAttribute('src', '');
+        });
+    </script>
+}
